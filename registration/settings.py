@@ -138,5 +138,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 #'smtpout.secureserver.net'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'anurag.20205040@mnnit.ac.in'
-EMAIL_HOST_PASSWORD = 'Anurag8969'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
