@@ -27,9 +27,17 @@ def SignupPage(request):
         if pass1!=pass2:
             return HttpResponse("Your password and confrom password are not Same!!")
         else:
-
-            my_user=User.objects.create_user(uname,email,pass1)
-            my_user.save()
+            user = User.objects.all()
+            f = False
+            for mUser in user:
+                if(mUser.username == uname):
+                    f = True
+                    messages.error(request, "You already have an account. Please log in")
+                    return redirect('signup')
+            if(f == False):
+                my_user=User.objects.create_user(uname,email,pass1)
+                my_user.save()
+            
             return redirect('login')
         
 
@@ -122,46 +130,3 @@ def start():
 
 
 
-
-    # all_objects = contactEnquiry.objects.all()
-# all_emails = [obj.email for obj in all_objects]
-# for mails in all_emails:
-#         print(mails)
-
-
-
-# send_mail(
-#     "Subject here",
-#     "Here is the message.",
-#     "anurag.20205040@mnnit.ac.in",
-#     ["anurag.jai07@gmail.com"],
-#     fail_silently=False,
-# )
-
-# subject='Testing Mail'
-# form_email='anurag.20205040@mnnit.ac.in'
-# msg='<p>Heyy we have new notice with title <b>ANURAG</b></p>'
-# to='anurag.jai07@gmail.com'
-# msg=EmailMultiAlternatives(subject,msg,form_email,[to])
-# msg.content_subtype='html'
-# msg.send()
-
-
-
-
-
-
-#now i have a specific mail and specific line
-                # subject='New Notification'
-                # form_email='anurag.20205040@mnnit.ac.in'
-                # msg='<p>Heyy we have new notice with title <b>ANURAG</b></p>'
-                # to=mails
-                # msg=EmailMultiAlternatives(subject,msg,form_email,[to])
-                # msg.content_subtype='html'
-                # msg.send()
-
-                # subject='New Notification'
-                # message=f"Heyy , we have a new notification with title {line}, for more information please visit https://academics.mnnit.ac.in/new/"
-                # email_from=settings.EMAIL_HOST_USER
-                # recipient_list=[mails]
-                # send_mail(subject,message,email_from,recipient_list)
